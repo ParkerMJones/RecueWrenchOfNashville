@@ -14,6 +14,8 @@ export const loader: LoaderFunction = async () => {
 const Payment = () => {
   const { paypal_client_id } = useLoaderData<LoaderData>();
 
+  console.log("test");
+
   return (
     <section className="h-screen bg-slate-100 py-10 px-5">
       <h2 className="text-4xl font-bold text-center pb-10">Make a payment</h2>
