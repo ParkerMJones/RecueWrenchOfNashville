@@ -22,15 +22,36 @@ const Payment = () => {
         please include your name and the date of your service in the "memo"
         section.
       </p>
-      <div className="flex flex-col gap-y-8 pt-12 mx-auto max-w-lg">
+      <div className="flex flex-col gap-y-6 pt-16 mx-auto max-w-lg">
         <PayPalScriptProvider options={{ "client-id": paypal_client_id }}>
-          <PayPalButtons style={{ layout: "horizontal" }} />
+          <PayPalButtons
+            style={{ layout: "horizontal" }}
+            createOrder={(data, actions) => {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: "1.99",
+                    },
+                  },
+                ],
+              });
+            }}
+            onApprove={async (data, actions) => {
+              return actions.order
+                ? await actions.order.capture().then((details) => {
+                    const name = details.payer.name?.given_name;
+                    alert(`Transaction completed by ${name}`);
+                  })
+                : alert("Something went wrong, please try again");
+            }}
+          />
         </PayPalScriptProvider>
         <a
           href="https://cash.app/$feedishswish"
           target="_blank"
           rel="noreferrer"
-          className="rounded-lg bg-cashAppGreen w-full py-2 px-5 flex items-center justify-center"
+          className="rounded-lg bg-cashAppGreen w-full py-2 mb-4 px-5 flex items-center justify-center "
         >
           <img src="/images/cashapp.png" alt="CashApp" width={180} />
         </a>
