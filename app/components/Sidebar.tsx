@@ -11,7 +11,7 @@ const navigation = [
   },
   {
     name: "Contact Us",
-    href: "/contact",
+    href: "/#contact",
     icon: <Phone color="white" size={24} />,
   },
 ];
