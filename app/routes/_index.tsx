@@ -6,6 +6,9 @@ import { Testimonial } from "~/components/Testimonial";
 import testimonials from "~/data/testimonials";
 import Sidebar from "~/components/Sidebar";
 import { useState } from "react";
+import { isMobile } from "react-device-detect";
+import Modal from "~/components/Modal";
+import { Link } from "@remix-run/react";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "Rescue Wrench" }];
@@ -13,6 +16,7 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [showPhoneOptions, setShowPhoneOptions] = useState(false);
 
   return (
     <main>
@@ -37,9 +41,21 @@ export default function Index() {
               <h3 className="text-3xl text-white text-center">of Nashville</h3>
             </div>
             <Carousel />
-            <button className="bg-red-400 text-white font-bold text-2xl rounded-lg p-4 z-10">
-              Call to book an appointment
-            </button>
+            {isMobile ? (
+              <button
+                onClick={() => setShowPhoneOptions(true)}
+                className="bg-red-400 text-white font-bold text-2xl rounded-lg p-4 z-10"
+              >
+                Call to book an appointment
+              </button>
+            ) : (
+              <Link
+                to="/#contact"
+                className="bg-red-400 text-white font-bold text-2xl rounded-lg p-4 z-10"
+              >
+                Call to book an appointment
+              </Link>
+            )}
           </div>
           <motion.div
             initial={{ y: 0 }}
@@ -71,28 +87,54 @@ export default function Index() {
           ))}
         </div>
       </section>
-      <section className="pt-10 pb-40 px-8 bg-slate-50">
-        <h3 className="text-3xl md:text-4xl text-center pb-10">About us</h3>
-        <div className="flex flex-col">
-          <p className="pb-16 leading-7">
-            Rescue Wrench of Nashville is a mobile automobile repair service
-            that comes to you, wherever you are within our radius. We service
-            various problems and are always striving to get you back on the road
-            and safe. Call us today to book an appointment!
-          </p>
-          <p className="text-2xl pb-4">Hours:</p>
-          <div className="flex flex-col gap-y-1 ml-2">
-            <p>Monday: Closed</p>
-            <p>Tuesday - Saturday: 24 hours</p>
-            <p>Sunday: 12:00 – 8:00 PM</p>
-          </div>
-          <p className="text-2xl pt-16 pb-4">Contact:</p>
-          <div className="flex flex-col gap-y-2 ml-2">
-            <p className="">Phone (Call or Text): (615) 555-5555</p>
-            <p>Email: parker.matthewjones@gmail.com</p>
+      <section className="pt-10 pb-40 px-8 bg-slate-50" id="contact">
+        <div className="max-w-md mx-auto">
+          <h3 className="text-3xl md:text-4xl text-center pb-10">About us</h3>
+          <div className="flex flex-col">
+            <p className="pb-16 leading-7">
+              Rescue Wrench of Nashville is a mobile automobile repair service
+              that comes to you, wherever you are within our radius. We service
+              various problems and are always striving to get you back on the
+              road and safe. Call us today to book an appointment!
+            </p>
+            <p className="text-2xl pb-4">Hours:</p>
+            <div className="flex flex-col gap-y-1 ml-2">
+              <p>Monday: Closed</p>
+              <p>Tuesday - Saturday: 24 hours</p>
+              <p>Sunday: 12:00 – 8:00 PM</p>
+            </div>
+            <p className="text-2xl pt-16 pb-4">Contact:</p>
+            <div className="flex flex-col gap-y-2 ml-2">
+              {isMobile ? (
+                <p>
+                  Phone (Call or Text):{" "}
+                  <span
+                    className="underline"
+                    onClick={() => setShowPhoneOptions(true)}
+                  >
+                    (615) 555-5555
+                  </span>
+                </p>
+              ) : (
+                <p>Phone (Call or Text): (615) 555-5555</p>
+              )}
+              <p>
+                Email:{" "}
+                <a
+                  href="mailto:parker.matthewjones@gmail.com"
+                  className="underline"
+                >
+                  parker.matthewjones@gmail.com
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </section>
+      <Modal
+        open={showPhoneOptions}
+        onClose={() => setShowPhoneOptions(false)}
+      />
     </main>
   );
 }
