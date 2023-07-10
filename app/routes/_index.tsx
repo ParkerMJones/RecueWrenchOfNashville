@@ -112,13 +112,13 @@ export default function Index() {
                     className="underline"
                     onClick={() => setShowPhoneOptions(true)}
                   >
-                    (615) 555-5555
+                    (615) 388-0228
                   </span>
                 </p>
               ) : (
-                <p>Phone (Call or Text): (615) 555-5555</p>
+                <p>Phone (Call or Text): (615) 388-0228</p>
               )}
-              <p>
+              {/* <p>
                 Email:{" "}
                 <a
                   href="mailto:parker.matthewjones@gmail.com"
@@ -126,7 +126,7 @@ export default function Index() {
                 >
                   parker.matthewjones@gmail.com
                 </a>
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

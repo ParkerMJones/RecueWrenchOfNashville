@@ -58,7 +58,7 @@ export default function Modal({
                   <a
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 "
-                    href="tel:7143627958"
+                    href="tel:6153880228"
                     onClick={onClose}
                   >
                     Call
@@ -66,7 +66,7 @@ export default function Modal({
                   <a
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:col-start-1 sm:mt-0"
-                    href="SMS:7143627958"
+                    href="SMS:6153880228"
                     onClick={onClose}
                   >
                     Text
